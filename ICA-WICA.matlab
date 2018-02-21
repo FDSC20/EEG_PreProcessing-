@@ -93,11 +93,3 @@ title('wICA','Fontsize',20)
 
 
 %%end 
-
-
-disp('donaldo mlp')
-
-
-
-
-
