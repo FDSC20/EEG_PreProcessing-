@@ -83,9 +83,7 @@ plot([-.5 1],[0 0],'k')
 plot([0 0],[min(EEGfepw.data(1,:)),max(EEGfepw.data(1,:))],'k')
 hold off
 title('wICA','Fontsize',20)
-
 %%for i 1:100 
-
 %%	q=EEGFepw.data (round(500/256)-100:round(500/256):round(500/256)+100);
 %%	[]
 %%end 
