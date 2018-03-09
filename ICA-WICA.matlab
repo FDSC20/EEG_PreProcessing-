@@ -14,12 +14,12 @@ pause();
 EEG=EEGTMP;
 clear EEGTMP;
 end
-EEG=BandPass(EEG,.1,100); %filter 
+EEG	=BandPass(EEG,.1,30); %filter 
 clear xx
 ALLEEG=EEG;
 
 a=EEG;
-a=BandPass(a,1,100); %filter 
+a=BandPass(a,1,30); %filter 
 CURRENTSET=2;
 ALLEEG(double(CURRENTSET))=a;
 EEGw=a;
@@ -65,25 +65,28 @@ EEGfepf.data=mean(EEGfepf.data(:,:,:),3);
 EEGfepw=pop_epoch(EEGw);%Epoch split wICA
 EEGfepw=pop_rmbase(EEGfepw,[-500 0]);%Remove baseline
 EEGfepw.data=mean(EEGfepw.data(:,:,:),3);
+for n =1:5
+	figure
+	subplot(211)
+	plot(([1:length(EEGfepf.data)]/256)-.5,EEGfepf.data(n,:))
+	hold on 
+	plot([-.5 1],[0 0],'k')
+	plot([0 0],[min(EEGfepf.data(n,:)),max(EEGfepf.data(n,:))],'k')
+	hold off
+	title('ICA','Fontsize',20)
+
+	subplot(212)
+	plot(([1:length(EEGfepw.data)]/256)-.5,EEGfepw.data(n,:))
+	hold on 
+	plot([-.5 1],[0 0],'k')
+	plot([0 0],[min(EEGfepw.data(n,:)),max(EEGfepw.data(n,:))],'k')
+	hold off
+	title('wICA','Fontsize',20)
+	pause()
+end
 
 
 
-figure
-subplot(211)
-plot(([1:length(EEGfepf.data)]/256)-.5,EEGfepf.data(1,:))
-hold on
-plot([-.5 1],[0 0],'k')
-plot([0 0],[min(EEGfepf.data(1,:)),max(EEGfepf.data(1,:))],'k')
-hold off
-title('ICA','Fontsize',20)
-subplot(212)
-plot(([1:length(EEGfepw.data)]/256)-.5,EEGfepw.data(1,:))
-hold on
-plot([-.5 1],[0 0],'k')
-plot([0 0],[min(EEGfepw.data(1,:)),max(EEGfepw.data(1,:))],'k')
-hold off
-title('wICA','Fontsize',20)
-%%for i 1:100 
-%%	q=EEGFepw.data (round(500/256)-100:round(500/256):round(500/256)+100);
-%%	[]
-%%end 
+
+
+
